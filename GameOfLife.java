@@ -20,37 +20,51 @@ public class GameOfLife {
         if (rows <= 0 || cols <= 0) {
             throw new IllegalArgumentException("Rows and columns must be positive.");
         }
+        society = new boolean[rows][cols];
 
         
     }
 
     /** Returns the number of rows in the society. */
     public int numberOfRows() {
-        return -1;
+        return society.length;
     }
 
     /** Returns the number of columns in the society. */
     public int numberOfColumns() {
-        return -1;
+        return society[0].length;
     }
 
     /** Makes the location at row, col alive. */
     public void growCellAt(int row, int col) {
-        
+        if (row >= 0 && row < numberOfRows() && col >= 0 && col < numberOfColumns()) {
+            society[row][col] = true;
+        }
     }
 
     /** Makes the location at row, col dead. */
     public void killCellAt(int row, int col) {
-        
+        if(row >= 0 && row < numberOfRows() && col >= 0 && col < numberOfColumns()) {
+            society[row][col] = false;
+        }
     }
 
     /** Returns true if the location contains a live cell. */
     public boolean cellAt(int row, int col) {
+        if (row >= 0 && row < numberOfRows() && col >= 0 && col < numberOfColumns()) {
+            return society[row][col];
+        }
         return false;
     }
 
     /** Makes every location in the society dead. */
     public void clear() {
+        for (int r = 0; r < numberOfRows(); r++) {
+            for (int c = 0; c < numberOfColumns(); c++) {
+                society[r][c] = false;
+            }
+        }
+
         
     }
 
@@ -63,6 +77,9 @@ public class GameOfLife {
      * TODO: Complete this method.
      */
     public int neighborCount(int row, int col) {
+        int count = 0; 
+        
+
         // TODO: Traverse the 3 x 3 neighborhood around row, col.
         //       Skip row, col itself.
         //       Check bounds before reading society[r][c].
@@ -82,6 +99,7 @@ public class GameOfLife {
      * TODO: Complete this method.
      */
     public void update() {
+
         // TODO: Create a SECOND 2D boolean array for the next generation.
         //
         // IMPORTANT:

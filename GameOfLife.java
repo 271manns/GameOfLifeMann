@@ -76,15 +76,31 @@ public class GameOfLife {
      *
      * TODO: Complete this method.
      */
-    public int neighborCount(int row, int col) {
+    public int neighborCount(int row, int col) 
+    {
         int count = 0; 
-        
-
-        // TODO: Traverse the 3 x 3 neighborhood around row, col.
-        //       Skip row, col itself.
-        //       Check bounds before reading society[r][c].
-
-        return 0;
+        for(int r = row - 1; r <= row + 1; r++) 
+       {
+            for(int c = col - 1; c <= col + 1; c++) 
+            {
+                if(r != row || c != col)
+                {
+                    if(r >= 0 && r < numberOfRows() && c >= 0 && c < numberOfColumns()) 
+                    {
+                        if(society[r][c]) 
+                            {
+                            count++;
+                        }
+                    }
+                }
+                     
+                    
+                    
+                
+                
+            }
+        }
+        return count;
     }
 
     /**
@@ -98,14 +114,40 @@ public class GameOfLife {
      *
      * TODO: Complete this method.
      */
-    public void update() {
+    public void update() 
+    {
+        boolean[][] nextGeneration = new boolean[numberOfRows()][numberOfColumns()];
 
-        // TODO: Create a SECOND 2D boolean array for the next generation.
-        //
-        // IMPORTANT:
-        // Do not change society while you are still using it to calculate
-        // neighbors. Every cell in the new generation must be based on the
-        // same old generation.
+        for(int r = 0; r < numberOfRows(); r++) 
+        {
+            for(int c =0; c < numberOfColumns(); c++)
+            {
+                if(society[r][c])
+                {
+                    if(neighborCount(r,c) == 2 || neighborCount(r,c) == 3)
+                    {
+                        nextGeneration[r][c] = true;
+                    }
+                    else
+                    {
+                        nextGeneration[r][c] = false;
+                    }
+                }
+                
+                else
+                {
+                    if(neighborCount(r,c) == 3)
+                    {
+                        nextGeneration[r][c] = true;
+                    }
+                    else
+                    {
+                        nextGeneration[r][c] = false;
+                    }
+                }
+            }
+        }
+        society = nextGeneration;
     }
 
     /**
@@ -117,9 +159,23 @@ public class GameOfLife {
      */
     @Override
     public String toString() {
-        // TODO: Use nested loops to build one String containing the board.
-        //       Add a newline after every row.
+        String board = "";
+        for(int r = 0; r < numberOfRows(); r++) 
+        {
+            for(int c = 0; c < numberOfColumns(); c++)
+            {
+                if(society[r][c])
+                {
+                    board += "O";
+                }
+                else
+                {
+                    board += ".";
+                }
+            }
+            board += "\n";
+        }
 
-        return "Complete toString() to display the text version of the board.\n";
+        return board;
     }
 }

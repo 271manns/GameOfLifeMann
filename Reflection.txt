@@ -1,0 +1,20 @@
+1. Why is a 2D array appropriate for the Game of Life:
+    A 2d array is appropriate for Game of Life because the game involved x and y coordinates.
+    This can be best represented in Java through a 2d data structure, like the 2D array.
+2. What do society.length and society[row].length do?
+    The society.length method returns the number of rows/the length and the society[row] returns the number of collumns/the width.
+3. Why could changing society directly while traversing it produce incorrect results?
+    Changing society directly in the update method will produce incorrect results because as the traversal goes from left to right,
+    values of true and false will change in the moment. This will cause the rightmost values to react to the new generation rather than the old generation they were meant 
+    to react to. 
+4. Why must neighborCount() check array boundaries?
+    Because the neighborCount() checks the values from the row - 1 to row +1 and col -1 to col + 1. Without checking the bounds, it will produce an index out of bounds error.
+5. Why do we need a second 2d array inside update? 
+    We need a second 2d array because we need to keep the new generation in memory without it impacting the values of the old generation. By doing this, the entire generation will progress by 1 at the same time, 
+    rather than values reacting to the new generation when they shouldnt. 
+6. How can the same GameOfLife object be displayed as both text and graphics?
+    They both access the same object of society but one uses a toString and the other uses graphics systems.
+7. What happens to a glider when it reaches the edge of our board, and how is that different 
+from wraparound?
+    It gets stopped by the wall and all it's cells travek until they are fully stopped by that wall. This is different than wraparound because in wraparound the generations would endlessly increase and the glider would endlessly glide
+    compared to it stopping in our code. 
